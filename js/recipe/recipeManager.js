@@ -9,13 +9,14 @@ export class RecipeManager{
             const data = await this.service.getRecipes(limit,skip)
             if(data.length > 0){
                 this.recipes = data
+                return
             }
         }catch(err){
             // ui
             console.log(err)
         }
     }
-    addRecipe(recipe){
+    addLocalRecipe(recipe){
         this.recipes.push(recipe)
     }
     
@@ -30,7 +31,7 @@ export class RecipeManager{
         recipe.instructions = updateData.instructions;
             }
     }
-    deleteRecipe(id){
+    deleteLocalRecipe(id){
         this.recipes = this.recipes.filter(recipe => recipe.id !== id)
     }
 }

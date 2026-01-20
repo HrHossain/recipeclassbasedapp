@@ -1,20 +1,14 @@
-import { RecipeErr } from "./js/error.js";
+import { RecipeManager } from "./js/recipe/recipeManager.js";
+import { RecipeService } from "./js/recipe/recipeService.js";
+import { HtmlHelper } from "./js/ui/htmlHelper.js";
 
-const API_URL = "https://dummyjson.com/recipes"
-let limit = 6
-let skip = 12
-
-async function fetchRecipes(limit,skip){
-    try{
-         const res = await fetch(`${API_URL}?limit=${limit}&skip=${skip}`);
-         if(!res.ok){
-            RecipeErr.customError("recipe fetching failed!")
-         }
-            const data = await res.json();
-            console.log(data)
-    }catch(err){
-        console.log(err)
-    }
+const service = new RecipeService("https://dummyjson.com/recipes")
+const manager = new RecipeManager(service)
+async function dataLoad(){
+    HtmlHelper.recipeSkeleton(7)
+    await manager.load(9,0)
+    HtmlHelper.render(manager.recipes)
 }
+dataLoad()
 
- fetchRecipes(limit , skip)
+ 
