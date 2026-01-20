@@ -1,13 +1,24 @@
-class RecipeManager{
-    constructor(){
+export class RecipeManager{
+    constructor(service){
+        this.service = service
         this.recipes = []
+    }
+
+    async load(limit,skip){
+        try{
+            const data = await this.service.getRecipes(limit,skip)
+            if(data.length > 0){
+                this.recipes = data
+            }
+        }catch(err){
+            // ui
+            console.log(err)
+        }
     }
     addRecipe(recipe){
         this.recipes.push(recipe)
     }
-    getAllRecipes(){
-        return this.recipes
-    }
+    
     getRecipesById(id){
         return this.recipes.find(recipe =>recipe.id === id)
     }
@@ -18,5 +29,8 @@ class RecipeManager{
         recipe.ingredients = updateData.ingredients;
         recipe.instructions = updateData.instructions;
             }
+    }
+    deleteRecipe(id){
+        this.recipes = this.recipes.filter(recipe => recipe.id !== id)
     }
 }
