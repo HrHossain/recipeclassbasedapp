@@ -7,7 +7,9 @@ export class HtmlHelper{
             }
             recipediv.innerHTML = ""
             recipediv.innerHTML =
-            recipes.map((recipe) => `<div class="col-span-12 sm:col-span-6 md:col-span-4 w-full min-h-[300px] ">
+            recipes.map((recipe) => `<a
+            href="singlerecipe.html?id=${recipe.id}" 
+            class="col-span-12 sm:col-span-6 md:col-span-4 w-full min-h-[300px] ">
              <div class="group  w-full max-w-sm bg-white rounded-2xl shadow-lg overflow-hidden">
         
         <div class="relative">
@@ -42,27 +44,27 @@ export class HtmlHelper{
             
             
             <h2 class="text-xl font-bold text-gray-900 mb-4">
-                ${recipe.name}
+                ${recipe.name.slice(0,19)}
             </h2>
             
            
             <div class="flex items-center gap-4 text-sm text-gray-600">
-                <div class="flex items-center gap-1">
+                <div class="flex flex-col items-center gap-1">
                     <i class="far fa-clock"></i>
                     <span>${recipe.cookTimeMinutes} min</span>
                 </div>
-                <div class="flex items-center gap-1">
-                    <span class="text-lg">🇮🇹</span>
+                <div class="flex flex-col items-center gap-1">
+                    <i class="fa-solid fa-globe"></i>
                     <span>${recipe.cuisine}</span>
                 </div>
-                <div class="flex items-center gap-1">
+                <div class="flex flex-col items-center gap-1">
                     <i class="fas fa-utensils"></i>
                     <span>Serves ${recipe.servings}</span>
                 </div>
             </div>
         </div>
              </div>
-            </div>`).join("")
+            </a>`).join("")
     }
 
     static recipeSkeleton(count){
