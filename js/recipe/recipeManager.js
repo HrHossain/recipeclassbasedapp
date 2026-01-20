@@ -21,6 +21,7 @@ export class RecipeManager{
     }
     
     getRecipesById(id){
+        
         return this.recipes.find(recipe =>recipe.id === id)
     }
     updateRecipe(id,updateData){

@@ -16,5 +16,17 @@ export class RecipeService{
                 return err
             }
     }
+    async getSingleRecipe(id){
+        try{
+        const res = await fetch(`${this.baseUrl}/${id}`);
+            if(!res.ok){
+            RecipeErr.customError("single recipe fetching failed!")
+            }
+            const data = await res.json();
+            return data
+            }catch(err){
+                return err
+            }
+    }
 
 }
