@@ -10,8 +10,7 @@ export class RecipeService{
             if(!res.ok){
             RecipeErr.customError("recipe fetching failed!")
             }
-            const data = await res.json();
-            return data.recipes
+            return res
             }catch(err){
                 return err
             }

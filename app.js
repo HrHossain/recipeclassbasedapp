@@ -8,17 +8,24 @@ document.addEventListener("DOMContentLoaded", () => {
     // landing page development
 const service = new RecipeService("https://dummyjson.com/recipes")
 const manager = new RecipeManager(service)
-
-
   const path = window.location.pathname
-
   if (path.endsWith("index.html") || path === "/") {
-    async function dataLoad(){
+    let limit = 9
+    let skip = 0
+    let totalRecipe 
+    const previous = document.getElementById("previous")
+    const next = document.getElementById("next")
+    async function dataLoad(limit,skip){
     HtmlHelper.recipeSkeleton(7)
-    await manager.load(9,0)
+    const value = await manager.load(limit , skip)
+    console.log(value)
     HtmlHelper.render(manager.recipes)
+
 }
-dataLoad()
+
+dataLoad(9,0)
+console.log(totalRecipe)
+
 }
   
 // single page development
@@ -33,11 +40,8 @@ dataLoad()
     const uiHolder = document.getElementById("singlerecipe")
 
         uiHolder.innerHTML = HtmlHelper.singleRecipeSkeletop()
-     const recipe = await service.getSingleRecipe(id)
-
-
-uiHolder.innerHTML = HtmlHelper.singleRecipeRender(recipe)
-    
+        const recipe = await service.getSingleRecipe(id)
+        uiHolder.innerHTML = HtmlHelper.singleRecipeRender(recipe)
    }
     fetchSingle()
   }

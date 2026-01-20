@@ -7,9 +7,13 @@ export class RecipeManager{
     async load(limit,skip){
         try{
             const data = await this.service.getRecipes(limit,skip)
-            if(data.length > 0){
-                this.recipes = data
-                return
+            
+            const allinfo = await data.json()
+            
+            const recipesData = allinfo.recipes
+            if(recipesData.length > 0){
+                this.recipes = recipesData
+                return allinfo.total
             }
         }catch(err){
             // ui

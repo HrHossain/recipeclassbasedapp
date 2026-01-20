@@ -9,7 +9,7 @@ export class HtmlHelper{
             recipediv.innerHTML =
             recipes.map((recipe) => `<a
             href="singlerecipe.html?id=${recipe.id}" 
-            class="col-span-12 sm:col-span-6 md:col-span-4 w-full min-h-[300px] ">
+            class="col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-4 w-full min-h-[300px] ">
              <div class="group  w-full max-w-sm bg-white rounded-2xl shadow-lg overflow-hidden">
         
         <div class="relative">
@@ -259,7 +259,7 @@ export class HtmlHelper{
 
     }
     static singleRecipeSkeletop(){
-        return ` <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-6">
+        return `<div class="max-w-4xl mx-auto p-6"> <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-6">
             
            
             <div class="w-full h-96 skeleton"></div>
@@ -390,7 +390,7 @@ export class HtmlHelper{
         
         <div class="text-center pb-6">
             <div class="h-4 bg-gray-200 rounded w-64 mx-auto skeleton"></div>
-        </div>`
+        </div></div>`
     }
 
 }
